@@ -82,14 +82,12 @@
             color: #3b82f6;
         }
 
-        /* الحاوية الرئيسية */
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 60px 20px 20px 20px;
         }
 
-        /* الهيدر واللوغو الرسمي الجديد */
         header {
             text-align: center;
             margin-bottom: 50px;
@@ -126,7 +124,6 @@
             margin: 0;
         }
 
-        /* الأقسام */
         section {
             margin-bottom: 40px;
         }
@@ -148,7 +145,6 @@
             border-right: 4px solid #3b82f6;
         }
 
-        /* كروت التطبيقات */
         .app-card {
             background-color: #111827;
             border: 1px solid #1f2937;
@@ -176,7 +172,6 @@
             text-transform: uppercase;
         }
 
-        /* بادج ذكاء اصطناعي برتقالي */
         .app-badge.orange-badge {
             background-color: rgba(249, 115, 22, 0.15);
             color: #fb923c;
@@ -195,7 +190,6 @@
             margin: 0 0 24px 0;
         }
 
-        /* الروابط والأيقونات التفاعلية الملونة */
         .links-row {
             display: flex;
             align-items: center;
@@ -223,7 +217,6 @@
             box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
         }
 
-        /* زر فوكس البرتقالي */
         .btn-orange {
             background: linear-gradient(135deg, #f97316, #ea580c);
             box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
@@ -253,7 +246,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        /* الألوان الرسمية الصحيحة مية بالمية */
         .social-link.facebook { background-color: #1877f2; }
         .social-link.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important; }
         .social-link.whatsapp { background-color: #25d366; }
@@ -263,7 +255,7 @@
             filter: brightness(1.15);
         }
 
-        /* صندوق التواصل الإحترافي */
+        
         .contact-box {
             background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
             border: 1px dashed #3b82f6;
@@ -296,7 +288,6 @@
             color: #60a5fa;
         }
 
-        /* فوتر الحقوق المحفوظة */
         footer {
             text-align: center;
             margin-top: 60px;
@@ -306,7 +297,6 @@
             font-size: 14px;
         }
 
-        /* خصائص الـ RTL لقلب اتجاه اللغة العربية */
         .rtl {
             direction: rtl;
         }
@@ -325,7 +315,6 @@
             text-align: right;
         }
 
-        /* إظهار وإخفاء النصوص البرمجية حسب لغة المتصفح المحددة */
         .lang-en { display: block; }
         .lang-ar { display: none; }
 
@@ -337,7 +326,7 @@
 
     <div class="lang-dropdown-container">
         <button class="dropdown-btn" onclick="toggleDropdown()">
-            <i class="fa-solid fa-globe"></i> Language / اللغة <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
+            <i class="fa-solid fa-globe"></i> Language <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
         </button>
         <div class="dropdown-menu" id="langMenu">
             <div class="dropdown-item" onclick="setLanguage('en')">English</div>
@@ -462,11 +451,9 @@
                 body.classList.remove('rtl');
             }
             
-            // إغلاق القائمة فوراً بعد الاختيار
             menu.classList.remove('show');
         }
 
-        // إغلاق القائمة في حال تم الضغط خارجها
         window.onclick = function(event) {
             if (!event.target.matches('.dropdown-btn') && !event.target.matches('.fa-globe') && !event.target.matches('.fa-chevron-down')) {
                 var dropdowns = document.getElementsByClassName("dropdown-menu");
