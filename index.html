@@ -1,1 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skaper Tech - Premium Software Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
 
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            line-height: 1.6;
+            direction: ltr;
+            transition: all 0.3s ease;
+        }
+
+        /* حاوية قائمة اللغات الاحترافية */
+        .lang-dropdown-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .dropdown-btn {
+            background-color: #111827;
+            color: #e2e8f0;
+            border: 1px solid #1f2937;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-btn:hover {
+            border-color: #3b82f6;
+            background-color: #1f2937;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 6px;
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            display: none;
+            overflow: hidden;
+            min-width: 130px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .dropdown-item:hover {
+            background-color: #1f2937;
+            color: #3b82f6;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px 20px 20px;
+        }
+
+        /* الهيدر واللوغو الرسمي الجديد */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .company-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 22px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0px 0px 15px rgba(59, 130, 246, 0.35));
+            transition: transform 0.3s ease;
+        }
+
+        header:hover .company-logo {
+            transform: scale(1.05);
+            filter: drop-shadow(0px 0px 25px rgba(59, 130, 246, 0.5));
+        }
+
+        h1 {
+            font-size: 34px;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 40%, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        /* الأقسام */
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 19px;
+            color: #60a5fa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            padding-left: 12px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .rtl h2 {
+            padding-left: 0;
+            padding-right: 12px;
+            border-left: none;
+            border-right: 4px solid #3b82f6;
+        }
+
+        /* كروت التطبيقات */
+        .app-card {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .app-card:hover {
+            transform: translateY(-2px);
+            border-color: #374151;
+        }
+
+        .app-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 6px;
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        /* بادج ذكاء اصطناعي برتقالي */
+        .app-badge.orange-badge {
+            background-color: rgba(249, 115, 22, 0.15);
+            color: #fb923c;
+        }
+
+        .app-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 12px 0;
+        }
+
+        .app-desc {
+            font-size: 15px;
+            color: #94a3b8;
+            margin: 0 0 24px 0;
+        }
+
+        /* الروابط والأيقونات التفاعلية الملونة */
+        .links-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+        }
+
+        /* زر فوكس البرتقالي */
+        .btn-orange {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+        }
+
+        .btn-orange:hover {
+            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.3);
+        }
+
+        .social-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            color: #ffffff;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* الألوان الرسمية الصحيحة مية بالمية */
+        .social-link.facebook { background-color: #1877f2; }
+        .social-link.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important; }
+        .social-link.whatsapp { background-color: #25d366; }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.05);
+            filter: brightness(1.15);
+        }
+
+        /* صندوق التواصل الإحترافي */
+        .contact-box {
+            background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+            border: 1px dashed #3b82f6;
+            border-radius: 16px;
+            padding: 35px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .contact-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 10px 0;
+        }
+
+        .contact-email {
+            font-size: 20px;
+            color: #3b82f6;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-email:hover {
+            text-decoration: underline;
+            color: #60a5fa;
+        }
+
+        /* فوتر الحقوق المحفوظة */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px 0;
+            border-top: 1px solid #1f2937;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* خصائص الـ RTL لقلب اتجاه اللغة العربية */
+        .rtl {
+            direction: rtl;
+        }
+
+        .rtl .lang-dropdown-container {
+            right: auto;
+            left: 20px;
+        }
+
+        .rtl .dropdown-menu {
+            right: auto;
+            left: 0;
+        }
+
+        .rtl .dropdown-item {
+            text-align: right;
+        }
+
+        /* إظهار وإخفاء النصوص البرمجية حسب لغة المتصفح المحددة */
+        .lang-en { display: block; }
+        .lang-ar { display: none; }
+
+        .rtl .lang-en { display: none; }
+        .rtl .lang-ar { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="lang-dropdown-container">
+        <button class="dropdown-btn" onclick="toggleDropdown()">
+            <i class="fa-solid fa-globe"></i> Language / اللغة <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
+        </button>
+        <div class="dropdown-menu" id="langMenu">
+            <div class="dropdown-item" onclick="setLanguage('en')">English</div>
+            <div class="dropdown-item" onclick="setLanguage('ar')">العربية</div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <header>
+            <img src="https://i.ibb.co/Kj7xnrGc/In-Shot-20260602-140611877.png" alt="Skaper Tech Logo" class="company-logo">
+            <h1>Skaper Tech</h1>
+            <p class="tagline">
+                <span class="lang-en">Crafting Next-Generation Mobile Ecosystems</span>
+                <span class="lang-ar">صناعة الأنظمة البرمجية وتطبيقات الهاتف الذكي للمستقبل</span>
+            </p>
+        </header>
+
+        <section>
+            <h2>
+                <span class="lang-en">Who We Are</span>
+                <span class="lang-ar">من نحن</span>
+            </h2>
+            <p style="color: #94a3b8; margin: 0; font-size: 15px;">
+                <span class="lang-en">We are a premier technology company specializing in the design, architecture, and development of high-performance mobile applications. Driven by innovation, we turn complex ideas into robust, user-centric digital products.</span>
+                <span class="lang-ar">نحن شركة تكنولوجية رائدة متخصصة في تصميم، هندسة، وتطوير تطبيقات الهاتف المحمول عالية الأداء. مدفوعين بالابتكار، نحوّل الأفكار المعقدة إلى منتجات رقمية قوية ومحورية للمستخدم.</span>
+            </p>
+        </section>
+
+        <section>
+            <h2>
+                <span class="lang-en">Our Products</span>
+                <span class="lang-ar">أعمالنا وتطبيقاتنا</span>
+            </h2>
+
+            <div class="app-card">
+                <div class="app-badge">
+                    <span class="lang-en">Local Marketplace</span>
+                    <span class="lang-ar">سوق محلي</span>
+                </div>
+                <h3 class="app-title">Sooq Safita</h3>
+                <p class="app-desc">
+                    <span class="lang-en">An integrated, specialized local marketplace application designed for discovering, posting, and browsing classified ads smoothly within the region.</span>
+                    <span class="lang-ar">تطبيق سوق محلي متكامل ومتخصص يتيح للمستخدمين نشر وتصفح الإعلانات المبوبة وإدارتها بكل سلاسة داخل المنطقة.</span>
+                </p>
+                <div class="links-row">
+                    <a href="https://sooqsafita.shop" target="_blank" class="btn-primary">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <span class="lang-en">Visit Website</span>
+                        <span class="lang-ar">زيارة الموقع</span>
+                    </a>
+                    
+                    <div class="social-group">
+                        <a href="https://www.facebook.com/profile.php?id=61589790774888&mibextid=ZbWKwL" target="_blank" class="social-link facebook" title="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/sooqsafita?igsh=MTAzbG1qb2lteWM1aQ==" target="_blank" class="social-link instagram" title="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/963984525900" target="_blank" class="social-link whatsapp" title="WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <div class="app-badge orange-badge">
+                    <span class="lang-en">Artificial Intelligence</span>
+                    <span class="lang-ar">ذكاء اصطناعي</span>
+                </div>
+                <h3 class="app-title">FoxFX</h3>
+                <p class="app-desc">
+                    <span class="lang-en">An advanced trading application leveraging cutting-edge Artificial Intelligence algorithms to provide real-time market insights and automated analytics.</span>
+                    <span class="lang-ar">تطبيق تداول ذكي متطور يعتمد على خوارزميات الذكاء الاصطناعي المتقدمة لتقديم تحليلات دقيقة وبيانات فورية لحركة الأسواق العالمية.</span>
+                </p>
+                <div class="links-row">
+                    <a href="https://foxfx.live" target="_blank" class="btn-primary btn-orange">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span class="lang-en">Explore Platform</span>
+                        <span class="lang-ar">استكشف المنصة</span>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="contact-box">
+            <p class="contact-title">
+                <span class="lang-en">Have a question or looking to collaborate?</span>
+                <span class="lang-ar">لديك استفسار أو ترغب في بناء مشروعك معنا؟</span>
+            </p>
+            <p style="margin: 0 0 15px 0; color: #94a3b8; font-size: 14px;">
+                <span class="lang-en">Please reach out via our official corporate email:</span>
+                <span class="lang-ar">يرجى مراسلتنا مباشرة على البريد الإلكتروني الرسمي للشركة:</span>
+            </p>
+            <a href="mailto:skapertech@gmail.com" class="contact-email">
+                <i class="fa-regular fa-envelope"></i> skapertech@gmail.com
+            </a>
+        </section>
+
+        <footer>
+            <span class="lang-en">All Rights Reserved © 2026 Skaper Tech</span>
+            <span class="lang-ar">جميع الحقوق محفوظة © 2026 لشركة Skaper Tech</span>
+        </footer>
+
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            var menu = document.getElementById('langMenu');
+            menu.classList.toggle('show');
+        }
+
+        function setLanguage(lang) {
+            var body = document.body;
+            var menu = document.getElementById('langMenu');
+            
+            if (lang === 'ar') {
+                body.classList.add('rtl');
+            } else {
+                body.classList.remove('rtl');
+            }
+            
+            // إغلاق القائمة فوراً بعد الاختيار
+            menu.classList.remove('show');
+        }
+
+        // إغلاق القائمة في حال تم الضغط خارجها
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-btn') && !event.target.matches('.fa-globe') && !event.target.matches('.fa-chevron-down')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
